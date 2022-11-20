@@ -18,7 +18,7 @@ const Createcontent = () => {
         else if (body.trim().length === 0)  alert("Body cannot be empty")
         else{
             let bodyArray = body.split(/[,}?.{;/)(:|-]+/)
-            console.log(bodyArray)
+            // console.log(bodyArray)
             let filterArr = []
             for (let txt of bodyArray) {
                 if (txt.trim().length !== 0) filterArr.push(txt.trim())
