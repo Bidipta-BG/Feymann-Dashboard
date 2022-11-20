@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 
+  useEffect(() => { clearLocalStorage() }, [])
+  window.onpopstate = () => {
+    navigate("/");
+  }
     const [username, setUsername] = useState("")
     let navigate = useNavigate()
 
@@ -39,19 +43,34 @@ const Home = () => {
         e.preventDefault()
     }
 
+  let clearLocalStorage =()=>{
+    localStorage.clear()
+  }
+
   return (
-      <div className="w-50 mx-auto mt-5">
+    <div>
+      <div class="p-3 alert alert-success border rounded-end">
+        <div className='d-flex justify-content-around'>
+          <h3>Welcome to Feynman Dashboard</h3>
+        </div>
+      </div>
+      <div >
+        <div className="w-50 mx-auto mt-5 ">
           <form onSubmit={submitAction}>
-              <div className="mb-3">
-                  <label className="form-label">Write your username</label>
-                  <input type="text" className="form-control" value={username} onChange={(e) => setUsername(e.target.value)} />
-              </div>
-              <div className="me-5">
-                  <button onClick={submitButton} type="button" className="btn btn-outline-success me-3">Enter Dashboard</button>
-          <button onClick={createUser} type="button" className="btn btn-outline-info">Create Username</button>
-              </div>
+            <div className="mb-4 mt-5">
+              <label className="form-label">Enter your username below: </label>
+              <input type="text" className="form-control" value={username} onChange={(e) => setUsername(e.target.value)} />
+            </div>
+            <div className="me-5">
+              <button onClick={submitButton} type="button" className="btn btn-outline-success me-3">Enter Dashboard</button>
+              <button onClick={createUser} type="button" className="btn btn-outline-info">Create Username</button>
+            </div>
           </form>
-    </div>
+        </div>
+      </div>
+     
+      
+</div>
   )
 }
 

@@ -8,19 +8,28 @@ const Createcontent = () => {
     const [contentarray, setContentarray] = useState([])
     const [next, setNext] = useState(false)
 
-    const [rating, setRating] = useState("")
+    // const [rating, setRating] = useState("")
     const [understanding, setUnderstanding] = useState({})
 
     // let contentarray= ["adad","adsad","adad","adad","adad"]
 
     let nextPage=()=>{
-        let bodyArray = body.split(",") 
-        setContentarray(bodyArray)
-        setNext(true)
+        if (title.trim().length === 0) alert("Title cannot be empty")
+        else if (body.trim().length === 0)  alert("Body cannot be empty")
+        else{
+            let bodyArray = body.split(/[,}?.{;/)(:|-]+/)
+            console.log(bodyArray)
+            let filterArr = []
+            for (let txt of bodyArray) {
+                if (txt.trim().length !== 0) filterArr.push(txt.trim())
+            }
+            setContentarray(filterArr)
+            setNext(true)
+        }
     }
 
     let selectRating=(data, block)=>{
-        setRating(data)
+        // setRating(data)
         understanding[block] = data
         setUnderstanding(understanding)
         // console.log(understanding);
@@ -64,20 +73,20 @@ const Createcontent = () => {
               <div className="row">
 
                   <div className="w-50 mx-auto mt-3">
-                      <h1>Create Content</h1>
+                      <h1>Write Your Content Below</h1>
                       <form onSubmit={submitAction}>
                           <div className="mt-4">
                               <label className="form-label">Title</label>
-                              <input className="form-control" type="text" placeholder="Title of the blog"
+                              <input className="form-control" type="text" placeholder="Title of your Content"
                                   value={title} onChange={(e) => setTitle(e.target.value)} />
                           </div>
                           <div className="mt-3">
-                              <label for="exampleFormControlTextarea1" className="form-label">Body</label>
-                              <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
+                              <label className="form-label">Body</label>
+                                  <textarea className="form-control" placeholder="Write the Complete content here" rows="8"
                                   value={body} onChange={(e) => setBody(e.target.value)}></textarea>
                           </div>
                           <div className="mt-4">
-                              <button onClick={nextPage} type="submit" className="btn btn-primary">Next</button>
+                              <button onClick={nextPage} type="submit" className="btn btn-primary">{"Next >>"}</button>
                           </div>
                       </form>
                   </div>
@@ -115,7 +124,7 @@ const Createcontent = () => {
                       <div className="card">
                           <div className="d-flex justify-content-between card-header">
                               <label className="form-label" >{x}</label>
-                              <select class="form-select-sm" value={rating} onChange={e => selectRating(e.target.value, x)}>
+                              <select class="form-select-sm" value={understanding.x} onChange={e => selectRating(e.target.value, x)}>
                                   <option value='0'>Select...</option>
                                   <option value="4">UNDERSTOOD</option>
                                   <option value="3">SOMEWHAT UNDERSTOOD</option>

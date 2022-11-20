@@ -19,7 +19,7 @@ const Dashboard = () => {
         // console.log(user)    
         let alldata = await fetch(`http://localhost:4000/getData/${user}`)
         alldata = await alldata.json()
-        console.log(alldata);
+        // console.log(alldata);
         setContent(alldata.data)
     }
 
@@ -48,8 +48,10 @@ const Dashboard = () => {
           <div className='mt-4'>
             
               <div className="card bg-info">
-                  <div className="d-flex justify-content-around card-header">
-                      <h1>Your TOPICS</h1>
+                  <div className="d-flex justify-content-between card-header">
+                      <h4>Topics</h4>
+                      <h1>DASHBOARD</h1>
+                      <h4>Understanding</h4>
                   </div>
               </div>
 
@@ -64,9 +66,9 @@ const Dashboard = () => {
               content.map(x=>
                   <div className='mt-2'>
                       <div className="card">
-                          <div className="d-flex justify-content-around card-header">
-                              <h3>{x.title}</h3>
-                              <h4>{x.percentage}</h4>
+                          <div className="d-flex justify-content-between card-header">
+                              <h5>{x.title}</h5>
+                              <h5>{x.percentage}</h5>
                           </div>
 
                       </div>
